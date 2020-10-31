@@ -14,11 +14,11 @@ public class App
 
     public static void main(String[] args) throws IOException
     {
-    	Dagger service = DaggerDaggerComponent.create().buildMongoHttp();
+    	DaggerComponent component = DaggerDaggerComponent.create();
+    	Dagger service = component.buildMongoHttp();
     	
     	//Create your server context here
-        
-    	service.getServer().start();
+//    	service.getServer().start();
     	
     	System.out.printf("Server started on port %d", port);
     }
