@@ -1,6 +1,7 @@
 package ca.utoronto.utm.mcs;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 
 import javax.inject.Singleton;
 
@@ -18,11 +19,10 @@ public class DaggerModule {
 	private static MongoClient db;
 
 	@Provides
-	@Singleton
-	public HttpServer provideHttpServer() {
+	HttpServer provideHttpServer() {
 		if (server == null) {
 			try {
-				server = HttpServer.create();
+				server = HttpServer.create(new InetSocketAddress("0.0.0.0", App.port), 0);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -32,10 +32,11 @@ public class DaggerModule {
 	}
 
 	@Provides
-	@Singleton
-	public MongoClient provideMongoClient() {
-		if (db == null)
-			db = MongoClients.create();
+	MongoClient provideMongoClient() {
+		if (db == null) {
+			String connectionString = ("mongodb://localhost:27017");
+			db = MongoClients.create(connectionString);
+		}
 		return db;
 	}
 
