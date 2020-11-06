@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import ca.utoronto.utm.mcs.dao.PostDAO;
 import ca.utoronto.utm.mcs.domain.Post;
 import ca.utoronto.utm.mcs.exception.DocNotExistException;
+import ca.utoronto.utm.mcs.exception.InvalidIdException;
 import ca.utoronto.utm.mcs.exception.MissingRequiredInfoException;
 
 public class PostService {
@@ -23,16 +24,14 @@ public class PostService {
 		return postDAO.savePost(post);
 	}
 	
-	public Post findPostById(String _id) throws MissingRequiredInfoException, DocNotExistException {
+	public Post findPostById(String _id) throws MissingRequiredInfoException, DocNotExistException, InvalidIdException {
 		return postDAO.findPostById(_id);
 	}
-	
-	public List<Post> getPostsByTitle(String title) {
-		
-		return new ArrayList<Post>();
+	public void deletePostById(String postId) throws MissingRequiredInfoException, DocNotExistException {
+		postDAO.deletePostById(postId);
 	}
-	
-	public void deletePost(String postId) {
-		
+
+	public List<Post> findPostsWithTitle(String title) throws InvalidIdException, DocNotExistException {
+		return postDAO.findPostsWithTitle(title);
 	}
 }
