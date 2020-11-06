@@ -7,12 +7,20 @@ import javax.inject.Inject;
 
 public class Post {
 
+	private String id;
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	private String title;
 	private String author;
 	private String content;
 	private List<String> tags = new ArrayList<>();
 	
-	@Inject
 	public Post(String title, String author, String content, List<String> tags) {
 		super();
 		this.title = title;
@@ -20,6 +28,8 @@ public class Post {
 		this.content = content;
 		this.tags = tags;
 	}
+	
+	public Post() {}
 
 	public String getTitle() {
 		return title;
