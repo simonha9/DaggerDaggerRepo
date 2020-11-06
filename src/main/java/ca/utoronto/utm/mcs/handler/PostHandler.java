@@ -84,8 +84,6 @@ public class PostHandler implements HttpHandler {
 	private void handlePut(HttpExchange r) throws Exception {
 		Post post = getPostFromRequestBody(r);
 		String id = postService.savePost(post);
-		// out id
-
 		String response = buildResponse(id);
 		r.getResponseHeaders().set("Content-Type", "appication/json");
 		r.sendResponseHeaders(200, response.length());
